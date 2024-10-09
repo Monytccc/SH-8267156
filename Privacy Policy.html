@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Monytccc</title><meta property="og:title" content="Monytccc"> <meta property="og:type" content="website"> <meta name="viewport" content="width=device-width, initial-scale=1"> <meta property="og:url" content="https://www.mnytc.com"><meta property="og:image" content="https://files.mnytc.com/monytccc-black.png"><meta name="description" content="Monytccc is a shared web hosting service for software development projects that uses a monytccc version control system and an internet hosting service. It is widely used for computer code. It provides access control and several collaboration features such as bug tracking, feature requests, task management, and websites for each project."><meta property="og:description" content="Monytccc is a shared web hosting service for software development projects that uses a monytccc version control system and an internet hosting service. It is widely used for computer code. It provides access control and several collaboration features such as bug tracking, feature requests, task management, and websites for each project."><meta property="og:site_name" content="Monytccc"> <meta property="fb:app_id" content="123456789"><link rel="apple-touch-icon" sizes="180x180" href="https://files.mnytc.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://files.mnytc.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://files.mnytc.com/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="https://files.mnytc.com/safari-pinned-tab.svg" color="#5bbad5"><meta name="msapplication-TileColor" content="#da532c"><meta name="theme-color" content="#ffffff"><link rel="shortcut icon" href="https://files.mnytc.com/mnytc.png" type="image/x-icon">
+    <style>
+        #pdf-container {
+            margin-left: auto;
+            margin-right: auto;
+            width: 900px;
+        }
+        body {
+            background-color: #000;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="pdf-container">
+
+    </div>
+
+
+    <script>
+        // Add the link to your PDF FILE.
+        const pdfUrl = 'https://files.mnytc.com/Privacy%20Policy.pdf';
+
+        // Get the container element
+        const container = document.getElementById('pdf-container');
+
+        // Load PDF document
+        pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc => {
+            // This for loop, loops through all of the pages and loads the doc
+            for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+                pdfDoc.getPage(pageNum).then(page => {
+                    // Create a viewport to render the PDF page. The higher number you add to the scale, the bigger the pdf file will look.
+                    const viewport = page.getViewport({ scale: 1.5 });
+
+                    // Set the dimensions of the container to match the PDF page
+                    container.style.width = viewport.width + 'px';
+                    container.style.height = viewport.height + 'px';
+
+                    // Prepare the canvas element to render the PDF page
+                    const canvas = document.createElement('canvas');
+                    container.appendChild(canvas);
+
+                    // Set the canvas dimensions
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+
+                    // Render the PDF page on the canvas
+                    const renderContext = {
+                        canvasContext: canvas.getContext('2d'),
+                        viewport: viewport,
+                    };
+                    page.render(renderContext);
+                });
+            }
+        });
+    </script>
+<script disable-devtool-auto src='https://files.mnytc.com/inspect-block.txt'></script>
+</body>
+
+</html>
